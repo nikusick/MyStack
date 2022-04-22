@@ -11,11 +11,11 @@ Stack::Stack(StackContainer container)
     switch (container)
     {
         case StackContainer::List: {
-            _pimpl = static_cast<IStackImplementation*>(new ListStack());    // конкретизируйте под ваши конструкторы, если надо
+            _pimpl = static_cast<IStackImplementation*>(new ListStack());
             break;
         }
         case StackContainer::Vector: {
-            _pimpl = static_cast<IStackImplementation*>(new VectorStack());    // конкретизируйте под ваши конструкторы, если надо
+            _pimpl = static_cast<IStackImplementation*>(new VectorStack());
             break;
         }
         default:
@@ -23,17 +23,17 @@ Stack::Stack(StackContainer container)
     }
 }
 
-Stack::Stack(const ValueType* valueArray, const size_t arraySize, StackContainer container)
-    : _containerType(container)
+Stack::Stack(const ValueType* valueArray, const size_t arraySize,
+             StackContainer container): _containerType(container)
 {
     switch (container)
     {
         case StackContainer::List: {
-            _pimpl = static_cast<IStackImplementation*>(new ListStack());    // конкретизируйте под ваши конструкторы, если надо
+            _pimpl = static_cast<IStackImplementation*>(new ListStack());
             break;
         }
         case StackContainer::Vector: {
-            _pimpl = static_cast<IStackImplementation*>(new VectorStack());    // конкретизируйте под ваши конструкторы, если надо
+            _pimpl = static_cast<IStackImplementation*>(new VectorStack());
             break;
         }
         default:
@@ -44,17 +44,18 @@ Stack::Stack(const ValueType* valueArray, const size_t arraySize, StackContainer
     }
 }
 
-Stack::Stack(const Stack& copyStack)
-    : _containerType(copyStack._containerType)
+Stack::Stack(const Stack& copyStack): _containerType(copyStack._containerType)
 {
     switch (_containerType)
     {
         case StackContainer::List: {
-            _pimpl = static_cast<IStackImplementation*>(new ListStack(*dynamic_cast<ListStack*>(copyStack._pimpl)));    // конкретизируйте под ваши конструкторы, если надо
+            _pimpl = static_cast<IStackImplementation*>(new ListStack(
+                    *dynamic_cast<ListStack*>(copyStack._pimpl)));
             break;
         }
         case StackContainer::Vector: {
-            _pimpl = static_cast<IStackImplementation*>(new VectorStack(*dynamic_cast<VectorStack*>(copyStack._pimpl)));    // конкретизируйте под ваши конструкторы, если надо
+            _pimpl = static_cast<IStackImplementation*>(new VectorStack(
+                    *dynamic_cast<VectorStack*>(copyStack._pimpl)));
             break;
         }
         default:
@@ -68,13 +69,13 @@ Stack& Stack::operator=(const Stack& copyStack) {
         delete _pimpl;
         switch (_containerType) {
             case StackContainer::List: {
-                _pimpl = static_cast<IStackImplementation *>(new ListStack(
-                        *dynamic_cast<ListStack *>(copyStack._pimpl)));    // конкретизируйте под ваши конструкторы, если надо
+                _pimpl = static_cast<IStackImplementation*>(new ListStack(
+                        *dynamic_cast<ListStack*>(copyStack._pimpl)));
                 break;
             }
             case StackContainer::Vector: {
-                _pimpl = static_cast<IStackImplementation *>(new VectorStack(
-                        *dynamic_cast<VectorStack *>(copyStack._pimpl)));    // конкретизируйте под ваши конструкторы, если надо
+                _pimpl = static_cast<IStackImplementation*>(new VectorStack(
+                        *dynamic_cast<VectorStack*>(copyStack._pimpl)));
                 break;
             }
             default:
@@ -86,12 +87,11 @@ Stack& Stack::operator=(const Stack& copyStack) {
 
 Stack::~Stack()
 {
-    delete _pimpl;        // композиция!
+    delete _pimpl;
 }
 
 void Stack::push(const ValueType& value)
 {
-    // можно, т.к. push определен в интерфейсе
     _pimpl->push(value);
 }
 
@@ -115,13 +115,13 @@ size_t Stack::size() const
     return _pimpl->size();
 }
 
-Stack::Stack(Stack &&moveStack) noexcept {
+Stack::Stack(Stack&& moveStack) noexcept {
     swap(_pimpl, moveStack._pimpl);
     swap(_containerType, moveStack._containerType);
     moveStack._pimpl = nullptr;
 }
 
-Stack &Stack::operator=(Stack &&moveStack) noexcept {
+Stack& Stack::operator=(Stack&& moveStack) noexcept {
     if (this != &moveStack) {
         swap(_pimpl, moveStack._pimpl);
         swap(_containerType, moveStack._containerType);

@@ -2,6 +2,7 @@
 #define STACK_LISTSTACK_H
 
 #include "StackImplementation.h"
+
 #include <list>
 
 using ValueType = double;

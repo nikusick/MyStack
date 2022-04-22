@@ -1,6 +1,8 @@
 #ifndef STACK_VECTORSTACK_H
 #define STACK_VECTORSTACK_H
+
 #include "StackImplementation.h"
+
 #include <vector>
 
 using ValueType = double;

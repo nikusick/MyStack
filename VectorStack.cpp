@@ -1,7 +1,3 @@
-//
-// Created by nikas on 21.04.2022.
-//
-
 #include "VectorStack.h"
 
 VectorStack::VectorStack(VectorStack &copyStack) {
