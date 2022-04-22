@@ -2,8 +2,7 @@
 #define STACK_VECTORSTACK_H
 
 #include "StackImplementation.h"
-
-#include <vector>
+#include "Vector.h"
 
 using ValueType = double;
 using namespace std;
@@ -11,7 +10,6 @@ using namespace std;
 class VectorStack : public IStackImplementation {
 public:
     VectorStack() = default;
-    VectorStack(VectorStack& copyStack);
     void push(const ValueType& value) override;
     // удаление с хвоста
     void pop() override;
@@ -22,7 +20,7 @@ public:
     // размер
     size_t size() const override;
 private:
-     vector <ValueType> _vector;
+     Vector _vector;
 };
 
 

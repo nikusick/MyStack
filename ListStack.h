@@ -11,7 +11,6 @@ using namespace std;
 class ListStack : public IStackImplementation {
 public:
     ListStack() = default;
-    ListStack(ListStack& copyStack);
     void push(const ValueType& value) override;
     // удаление с хвоста
     void pop() override;

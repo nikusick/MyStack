@@ -19,7 +19,3 @@ bool ListStack::isEmpty() const {
 size_t ListStack::size() const {
     return _list.size();
 }
-
-ListStack::ListStack(ListStack& copyStack) {
-    _list = copyStack._list;
-}
