@@ -34,12 +34,11 @@ public:
     bool isEmpty() const;
     size_t size() const;
 
-    void set_pimpl();
-    void set_pimpl(const Stack& copyStack);
-
-    void destruct_copy(Stack& stack, Stack& copyStack);
 private:
     IStackImplementation* _pimpl = nullptr;
     StackContainer _containerType;
+
+    void setPimpl();
+    void setPimpl(const Stack& copyStack);
 };
 

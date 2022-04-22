@@ -8,13 +8,13 @@
 Stack::Stack(StackContainer container)
         : _containerType(container)
 {
-    set_pimpl();
+    setPimpl();
 }
 
 Stack::Stack(const ValueType* valueArray, const size_t arraySize,
              StackContainer container): _containerType(container)
 {
-    set_pimpl();
+    setPimpl();
     for (size_t i = 0; i < arraySize; ++i) {
         _pimpl->push(valueArray[i]);
     }
@@ -22,7 +22,7 @@ Stack::Stack(const ValueType* valueArray, const size_t arraySize,
 
 Stack::Stack(const Stack& copyStack): _containerType(copyStack._containerType)
 {
-    set_pimpl(copyStack);
+    setPimpl(copyStack);
 }
 
 Stack& Stack::operator=(const Stack& copyStack) {
@@ -79,7 +79,7 @@ size_t Stack::size() const
     return _pimpl->size();
 }
 
-void Stack::set_pimpl() {
+void Stack::setPimpl() {
     switch (_containerType)
     {
         case StackContainer::List: {
@@ -94,7 +94,7 @@ void Stack::set_pimpl() {
             throw std::runtime_error("Неизвестный тип контейнера");
     }
 }
-void Stack::set_pimpl(const Stack& copyStack) {
+void Stack::setPimpl(const Stack& copyStack) {
     switch (_containerType) {
         case StackContainer::List: {
             _pimpl = static_cast<IStackImplementation *>(new ListStack(
